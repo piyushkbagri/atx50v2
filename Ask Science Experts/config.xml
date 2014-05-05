@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.planetseed.ATX" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>Ask Science Experts</name>
+    <description>
+        Ask Science Experts
+    </description>
+    <author email="piyush.bagri@dev2source.com" href="http://planetseed.com">
+        Schlumberger Excellence in Education Development (SEED), Inc.
+    </author>
+    <icon src="icon.png" />
+    <icon gap:density="ldpi" gap:platform="android" src="App_Resources/Android/drawable-ldpi/icon.png" />
+    <icon gap:density="mdpi" gap:platform="android" src="App_Resources/Android/drawable-mdpi/icon.png" />
+    <icon gap:density="hdpi" gap:platform="android" src="App_Resources/Android/drawable-hdpi/icon.png" />
+    <icon gap:density="xhdpi" gap:platform="android" src="App_Resources/Android/drawable-hdpi/icon.png" />
+
+
+    <icon src="App_Resources/iOS/icon.png" gap:platform="ios" width="57" height="57" />
+    <icon src="App_Resources/iOS/icon@2x.png" gap:platform="ios" width="114" height="114" />
+    <icon src="App_Resources/iOS/icon-60.png" gap:platform="ios" width="60" height="60" />
+    <icon src="App_Resources/iOS/icon-60@2x.png" gap:platform="ios" width="120" height="120" />
+    <icon src="App_Resources/iOS/icon-76.png" gap:platform="ios" width="76" height="76" />
+    <icon src="App_Resources/iOS/icon-76@2x.png" gap:platform="ios" width="152" height="152" />
+    <icon src="App_Resources/iOS/icon-72.png" gap:platform="ios" width="72" height="72" />
+    <icon src="App_Resources/iOS/icon-72@2x.png" gap:platform="ios" width="144" height="144" />
+
+    <gap:plugin name="org.apache.cordova.core.network-information" />
+    <gap:plugin name="org.apache.cordova.core.dialogs" />
+    <gap:plugin name="org.apache.cordova.core.device" />
+
+
+    <gap:splash src="splash.png" />
+    <gap:splash src="App_Resources/iOS/Default.png"                 gap:platform="ios" width="320"  height="480"  />
+    <gap:splash src="App_Resources/iOS/Default@2x.png"           gap:platform="ios" width="640"  height="960"  />
+    <gap:splash src="App_Resources/iOS/Default-568h@2x.png"         gap:platform="ios" width="640"  height="1136" />
+    <gap:splash src="App_Resources/iOS/Default-Landscape.png"       gap:platform="ios" width="1024" height="748"  />
+    <gap:splash src="App_Resources/iOS/Default-Portrait.png"        gap:platform="ios" width="768"  height="1004" />
+    <!-- retina iPad -->
+    <gap:splash src="App_Resources/iOS/Default-Landscape@2x.png" gap:platform="ios" width="2048" height="1496" />
+    <gap:splash src="App_Resources/iOS/Default-Portrait@2x.png"  gap:platform="ios" width="1536" height="2008" />
+
+    <gap:splash src="splash/android/ldpi.png"  gap:platform="android" gap:density="ldpi"  />
+    <gap:splash src="splash/android/mdpi.png"  gap:platform="android" gap:density="mdpi"  />
+    <gap:splash src="splash/android/hdpi.png"  gap:platform="android" gap:density="hdpi"  />
+    <gap:splash src="splash/android/xhdpi.png" gap:platform="android" gap:density="xhdpi" />
+
+
+    <preference name="permissions" value="none" />
+    <preference name="phonegap-version" value="3.2.0" />
+    <preference name="orientation" value="default" />
+    <preference name="target-device" value="universal" />
+    <preference name="fullscreen" value="true" />
+    <preference name="webviewbounce" value="true" />
+    <preference name="prerendered-icon" value="true" />
+    <preference name="stay-in-webview" value="false" />
+    <preference name="ios-statusbarstyle" value="default" />
+    <preference name="detect-data-types" value="true" />
+    <preference name="exit-on-suspend" value="false" />
+    <preference name="show-splash-screen-spinner" value="true" />
+    <preference name="auto-hide-splash-screen" value="true" />
+    <preference name="disable-cursor" value="false" />
+    <preference name="android-minSdkVersion" value="11" />
+    <preference name="android-installLocation" value="auto" />
+
+
+    <preference name="useBrowserHistory" value="true" />
+    <preference name="exit-on-suspend" value="false" />
+
+    <preference name="AllowInlineMediaPlayback" value="false" />
+    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="BackupWebStorage" value="cloud" />
+    <preference name="DisallowOverscroll" value="false" />
+    <preference name="EnableLocation" value="false" /><!-- DEPRECATED -->
+    <preference name="EnableViewportScale" value="false" />
+    <preference name="FadeSplashScreen" value="true" />
+    <preference name="FadeSplashScreenDuration" value=".25" />
+    <preference name="HideKeyboardFormAccessoryBar" value="false" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="true" />
+    <preference name="KeyboardShrinksView" value="false" />
+    <preference name="MediaPlaybackRequiresUserAction" value="false" />
+    <preference name="ShowSplashScreenSpinner" value="true" />
+    <preference name="SuppressesIncrementalRendering" value="false" />
+    <preference name="TopActivityIndicator" value="gray" />
+
+
+    <access origin="*" />
+</widget>
