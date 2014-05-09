@@ -144,12 +144,13 @@ var Application = {
             qSubmit = true;     
             qSubmitSuccess = false;
             var url = $server + 'services/atx_tktsubmit';
-            $.jsonp({  callbackParameter:'callback', 
+            $.ajax({   callbackParameter:'callback', 
                        url: url,
                        type: 'post',
                        crossDomain: true,
                 	   timeout:15000,
                        data: data,
+                       jsonpCallback:'callback',
                        success: function(data) {
                            if (data["success"] == 1) {
                                if (isDevice != true) {
@@ -648,7 +649,7 @@ var Application = {
                 navigator.notification.alert('Invalid Age, Age should be greated than 4', function () {  }, 'Error');
                 return false;
             } 
-          
+         
             if(isNaN(age) || age.indexOf(".") >= 0)
             {
                 navigator.notification.alert('Invalid Age, Age should be integer', function () {   }, 'Error');
