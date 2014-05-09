@@ -313,8 +313,9 @@
                             
                             <div data-role="fieldcontain">
                                 <label for="atx-age" class="ui-hidden-accessible">Age</label>
-                            <!--      <input type="text" pattern="\d*" placeholder="Age.." name="txt-age" id="atx-age"  />
-                           -->    <input type="text" onfocus="this.type='number'" id="atx-age" name="txt-age" onblur="this.type='text'" placeholder="Age..." pattern="/d"/>
+                                  <input type="text" pattern="\d*" placeholder="Age..." name="txt-age" id="atx-age"  min="4" max="70" onfocus="this.type='number'" onblur="this.type='text'"   />
+                               <!--   <input type="text" pattern="\d*" placeholder="Age.." name="txt-age1" id="atx-age1"  /> -->
+                            
                              </div>
                             
                             <div data-role="fieldcontain">
