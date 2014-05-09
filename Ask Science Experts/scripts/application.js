@@ -633,30 +633,27 @@ var Application = {
         data['category'] = $('#atx-question-category').val().trim();
         if (isDevice == true) {
             if (data['name'] === '') {
-                navigator.notification.alert('Name field is required and cannot be empty', function () {
-                }, 'Error');
+                navigator.notification.alert('Name field is required and cannot be empty', function () { }, 'Error');
                 return false;
             }
             if (data['age'] === '' ) {
-                navigator.notification.alert('Invalid Age, Please select your age', function () {
-                }, 'Error');
+                navigator.notification.alert('Invalid Age, Please select your age', function () { }, 'Error');
                 return false;
             }     
             if (data['age'] > 70) {
-                navigator.notification.alert('Invalid Age, Age should be less than 70', function () {
-                }, 'Error');
+                navigator.notification.alert('Invalid Age, Age should be less than 70', function () {  }, 'Error');
                 return false;
             } 
             if ( data['age'] < 4) {
-                navigator.notification.alert('Invalid Age, Age should be greated than 4', function () {
-                }, 'Error');
+                navigator.notification.alert('Invalid Age, Age should be greated than 4', function () {  }, 'Error');
                 return false;
             } 
-             if ( data['age'] != age) {
-                navigator.notification.alert('Invalid Age, Age should be integer', function () {
-                }, 'Error');
+          
+            if(isNaN(age) || age.indexOf(".") >= 0)
+            {
+                navigator.notification.alert('Invalid Age, Age should be integer', function () {   }, 'Error');
                 return false;
-            } 
+            }
             
             if (data['email'] === '') {
                 navigator.notification.alert('Email field is required and cannot be empty', function () {
