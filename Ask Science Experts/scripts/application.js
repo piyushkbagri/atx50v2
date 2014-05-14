@@ -2,7 +2,7 @@ var $PSserver = 'http://www.planetseed.com/';
 var $server = 'http://www.planetseed.com/';
 var ajaxing = false;
 var fetchdata = false;
-
+var jsonRequest;
 var category = '';
 var loadCategory = 0;
 var qSubmit = false;
@@ -22,26 +22,39 @@ var Application = {
                 
              //load category once a day for iOS.
              var d = new Date();
-             if( d.getTime() > loadCategory + (3600*24) ) 
+             if( loadCategory>0 && ( d.getTime() > (loadCategory + (3600*24) ))) 
              {
                loadCategory=0;
                Application.initQuestionPage();
+               $('#atx-questionform')[0].reset();  
              }
                 
             })
+        
             .on('pageinit', '#browsetopic-page', function () {
                 Application.initCategoryPage();
             })
             .on('pagebeforeshow', '#browsetopic-page', function () {
                if (loadCategory === 0)   Application.initCategoryPage();
+               
+               // recheck category for empty 
+               var count =$('#category-list').children().length;
+               if(count<1)
+               {
+                $('#category-list').empty();   
+                Application.initCategoryPage();   
+               }
+                
             })   
         
             .on('pageinit', '#asktheexpert-page', function () {
                 //   Application.initCategoryPage();
             })
+        
             .on('pagebeforeshow', '#atx-form-page', function () {
                 qSubmit = false;
             })
+        
             .on('pageinit', '#atx-form-page', function () {
                 qSubmit = false;
                 Application._getDbValues();
@@ -49,6 +62,7 @@ var Application = {
                 //$('#atx-age').selectmenu("refresh");
             
             })
+        
             .on('pageinit', '#faq-detail-page-ext', function () {
                 $('#faq-detail-page-ext .content').html($('#faq-detail-page .content').html());
                 $.mobile.activePage.trigger("refresh");  
@@ -81,7 +95,8 @@ var Application = {
             $.mobile.defaultPageTransition = 'none';
             $.mobile.defaultDialogTransition = 'none';
             $.mobile.buttonMarkup.hoverDelay = 0;
-            $.mobile.defaultHomeScroll = 0;
+       //     $.mobile.defaultHomeScroll = 0;
+       //     $.mobile.silentScroll=0; 
         });
         
         
@@ -90,27 +105,56 @@ var Application = {
             loadCategory = 0;
             Application.initCategoryPage();
         });
+        
         $('#homeAskBtn').click(function(e) {
              $.mobile.loading('show');
             if (!Application.checkConnection()) e.preventDefault(); 
              $.mobile.loading('hide');
         });
+        
         $('#homeBrowseBtn').click(function(e) {
             $.mobile.loading('show');
             if (ajaxing) {  e.preventDefault(); } // load only when ajax call compelete
             if (!Application.checkConnection()) e.preventDefault(); 
             $.mobile.loading('hide');
         });
-      
-        /*
-        setInterval(function() {
-         if(navigator.connection.type === Connection.NONE &&  $.mobile.activePage.attr('id')!='home-page') 
-           {   
-               navigator.notification.alert('Please check your network connection', function () {
-                }, 'Connection error');
+        
+        
+        //Question submit step 1
+        //$(document).off("submit", '#atx-questionform').on("submit", '#atx-questionform', function(event) {       
+       $('#atx-questionform').submit(function (event) {
+            var data = { };
+            data['question'] = $('#atx-question').val().trim(); 
+            data['category'] = $('#atx-question-category').val().trim();  
+            if (data['category'] === '') {
+                navigator.notification.alert('Invalid Category, Please select question category', function () {
+                }, 'Error');
+                return false;
+            }              
+            if (data['question'] === '') {
+                navigator.notification.alert('Question is required and cannot be empty', function () {
+                }, 'Error');
+                return false;
+            }
+            event.preventDefault();
+            $.mobile.changePage("#atx-form-page", { transition: "none", changeHash: true });
+            return false;
+        });
+        
+        
+        //abort ajax request if any bottom nav bar button click
+        $('.btmbutton').click(function(e) {
+           
+            if (jsonRequest) {
+        	jsonRequest.abort();
+        	jsonRequest = null;
+            $.mobile.loading('hide');
+            qSubmit = false;
+            ajaxing = false;
            } 
-            
-        }, 10000);*/
+           
+        });
+        
         
         
     },
@@ -144,11 +188,12 @@ var Application = {
             qSubmit = true;     
             qSubmitSuccess = false;
             var url = $server + 'services/atx_tktsubmit';
-            $.ajax({   callbackParameter:'callback', 
+            $.ajax({  
+                       callbackParameter:'callback', 
                        url: url,
-                       type: 'post',
+                       type: 'POST',
                        crossDomain: true,
-                	   timeout:15000,
+                	   timeout:30000,
                        data: data,
                        jsonpCallback:'callback',
                        success: function(data) {
@@ -202,11 +247,11 @@ var Application = {
         var $lng = $("#app-language").val();
         var $url = $PSserver + 'services/atx_ticketcategory/' + $lng ;
         var quesOpt = '<option value="" selected>Select category<\/option>';
-        $.jsonp({  callbackParameter:'callback', 
+        jsonRequest=$.jsonp({  callbackParameter:'callback', 
                    type: 'GET',
                    url: $url,
                    async:false,
-                   timeout:10000,
+                   timeout:20000,
                    dataType: 'jsonp',
                    contentType:"application/json",
                    
@@ -240,26 +285,7 @@ var Application = {
                    }
                });    
         
-        //question submit
-               
-        $('#atx-questionform').submit(function (event) {
-            var data = { };
-            data['question'] = $('#atx-question').val().trim(); 
-            data['category'] = $('#atx-question-category').val().trim();  
-            if (data['category'] === '') {
-                navigator.notification.alert('Invalid Category, Please select question category', function () {
-                }, 'Error');
-                return false;
-            }              
-            if (data['question'] === '') {
-                navigator.notification.alert('Question is required and cannot be empty', function () {
-                }, 'Error');
-                return false;
-            }
-            event.preventDefault();
-            $.mobile.changePage("#atx-form-page", { transition: "none", changeHash: true });
-            return false;
-        });
+
     },
 
     /**********************************************/
@@ -274,16 +300,17 @@ var Application = {
         if (! Application.checkConnection()) return;
         var $List = $('#category-list');
         var $lng = $("#app-language").val();
+        
         var $url = $PSserver + 'services/atx_faqcategory/' + $lng ;
         var htmlItems = '';
         loadCategory = 0;
         $List.empty();
         ajaxing = true;
-        $.jsonp({  callbackParameter:'callback', 
+        jsonRequest=$.jsonp({  callbackParameter:'callback', 
                    type: 'GET',
                    url: $url,
                    async:false,
-                   timeout:10000,
+                   timeout:20000,
                    dataType: 'jsonp',
                    contentType:"application/json",
                    jsonpCallback:'callback',
@@ -311,7 +338,7 @@ var Application = {
                                htmlItems +='<li><a class="categotyItem" data-transition="fade"  tid=' + value.tid + ' tname=' + value.name + '  href="#faq-list-page">' + value.name + '</a></li>';
                            });
                        });
-                       
+                       $List.empty(); 
                        $List.append(htmlItems);
                        if ($List.hasClass('ui-listview')) {
                            $List.listview('refresh');
@@ -320,7 +347,7 @@ var Application = {
                        }
                        var d = new Date();
                        loadCategory = d.getTime(); 
-                       
+                      
                    },
                    error: function (e, textStatus) {
                      Application.showError (e, textStatus);
@@ -364,11 +391,11 @@ var Application = {
         var $lng = $("#app-language").val();
         var $url = $PSserver + 'services/atx_showfaq/' + $nid;
         ajaxing = true;
-        $.jsonp({  callbackParameter:'callback', 
+        jsonRequest=$.jsonp({  callbackParameter:'callback', 
                    type: 'GET',
                    url: $url,
                    async:false,
-                   timeout:10000,
+                   timeout:20000,
                    dataType: 'jsonp',
                    contentType:"application/json",
                    jsonpCallback:'callback',
@@ -425,11 +452,11 @@ var Application = {
         var htmlItems = '';
         $List.empty();
         ajaxing = true;
-        $.jsonp({  callbackParameter:'callback', 
+        jsonRequest=$.jsonp({  callbackParameter:'callback', 
                    type: 'GET',
                    url: $url,
                    async:false,
-                   timeout:10000,
+                   timeout:20000,
                    dataType: 'jsonp',
                    contentType:"application/json",
                    jsonpCallback:'callback',
@@ -461,7 +488,7 @@ var Application = {
                                //htmlItems +='<li><a  nid="' + value.nid + '" class="nodeItemExt" data-transition="flip" href="faq-detail-page.html?nid=' + value.nid +  '"><h2>' + value.title + '</h2><p>' + value.Question + '</p></a></li>';                               
                            });
                        });
-
+ 					   $List.empty();
                        $List.append(htmlItems);
                        if ($List.hasClass('ui-listview')) {
                            $List.listview('refresh');
@@ -513,10 +540,10 @@ var Application = {
         var $url = $PSserver + 'services/atx_faqRnd/' + $lng;
         var htmlItems = '';
         ajaxing = true;
-        $.jsonp({  callbackParameter:'callback', 
+        jsonRequest=$.jsonp({  callbackParameter:'callback', 
                    type: 'GET',
                    url: $url,
-                   timeout:10000,
+                   timeout:20000,
                    async:false,
                    dataType: 'jsonp',
                    contentType:"application/json",
@@ -646,7 +673,7 @@ var Application = {
                 return false;
             } 
             if ( data['age'] < 4) {
-                navigator.notification.alert('Invalid Age, Age should be greated than 4', function () {  }, 'Error');
+                navigator.notification.alert('Invalid Age, Age should be greater than 4', function () {  }, 'Error');
                 return false;
             } 
          
@@ -742,6 +769,13 @@ var Application = {
             if (items.country != undefined) {
                 $('#atx-country').val(items.country).selectmenu("refresh");
             }
+            else
+            {
+                
+                
+            }
+            
+            
             if (items.is_teacher != undefined) {
                 $("input[name=atx-is_teacher][value=" + items.is_teacher + "]").prop('checked', true).refresh;
                 //   $('#atx-is_teacher').prop('checked', items.is_teacher);

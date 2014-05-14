@@ -140,12 +140,12 @@
                 <div  data-role="navbar" class="buttom-button ui-body-b"  >
                     <ul>
                         <li>
-                            <a  data-transition="fade" href="#home-page" data-role="button" data-icon="home" data-ajax="false"  data-direction= "reverse" >Home</a>
+                            <a  class="btmbutton"  data-transition="fade" href="#home-page" data-role="button" data-icon="home" data-ajax="false"  data-direction= "reverse" >Home</a>
                         </li>
                         <li>
-                            <a  data-transition="fade" href="#asktheexpert-page" data-role="button"  data-icon="grid"  data-direction= "reverse" >Ask </a>
+                            <a  class="btmbutton"  data-transition="fade" href="#asktheexpert-page" data-role="button"  data-icon="grid"  data-direction= "reverse" >Ask </a>
                         </li>
-                        <!-- <li><a  data-transition="fade" href="#browsetopic-page" data-role="button"  data-direction= "reverse"  data-icon="search">Browse</a> </li>         -->
+                        <!-- <li><a class="btmbutton"  data-transition="fade" href="#browsetopic-page" data-role="button"  data-direction= "reverse"  data-icon="search">Browse</a> </li>         -->
                     </ul>
                 </div>
             </footer>
@@ -176,13 +176,13 @@
                 <div  data-role="navbar" class="buttom-button ui-body-b"  >
                     <ul>
                         <li>
-                            <a  rel="external"  data-transition="fade" href="index.html#browsetopic-page" data-role="button"  data-direction="reverse" data-icon="back">Back</a>
+                            <a class="btmbutton"  rel="external"  data-transition="fade" href="index.html#browsetopic-page" data-role="button"  data-direction="reverse" data-icon="back">Back</a>
                         </li>
                         <li>
-                            <a  data-transition="fade" href="#home-page" data-role="button" data-direction="reverse" data-icon="home" >Home</a>
+                            <a class="btmbutton"  data-transition="fade" href="#home-page" data-role="button" data-direction="reverse" data-icon="home" >Home</a>
                         </li>
                         <li>
-                            <a  data-transition="fade" href="#asktheexpert-page" data-role="button"  data-direction="reverse" data-icon="grid">Ask </a>
+                            <a  class="btmbutton"  data-transition="fade" href="#asktheexpert-page" data-role="button"  data-direction="reverse" data-icon="grid">Ask </a>
                         </li>
 
                     </ul>
@@ -218,13 +218,13 @@
                 <div  data-role="navbar" class="buttom-button ui-body-b"  >
                     <ul>
                         <li>
-                            <a rel="external"  data-transition="fade" href="index.html#faq-list-page"  data-role="button" data-direction="reverse" data-icon="back">Back</a>
+                            <a rel="external" class="btmbutton"  data-transition="fade" href="index.html#faq-list-page"  data-role="button" data-direction="reverse" data-icon="back">Back</a>
                         </li>
                         <li>
-                            <a  data-transition="fade" href="#asktheexpert-page" data-role="button" data-direction="reverse" data-icon="grid">Ask </a>
+                            <a class="btmbutton"  data-transition="fade" href="#asktheexpert-page" data-role="button" data-direction="reverse" data-icon="grid">Ask </a>
                         </li>
                         <li>
-                            <a  data-transition="fade" href="#browsetopic-page" data-role="button" data-direction="reverse" data-icon="search">Browse</a>
+                            <a class="btmbutton"   data-transition="fade" href="#browsetopic-page" data-role="button" data-direction="reverse" data-icon="search">Browse</a>
                         </li>
                     </ul>
                 </div>
@@ -252,13 +252,13 @@
                                 <option value="" selected>Select category</option>
                                 <option value="Earth/Space Science" >Earth/Space Science</option>
                                 <option value="Physical/Chemical Science" >Physical/Chemical Science</option>
-                                <option value="Technology" >Technology</option>
+                                <option value="Technology" >Technology--</option>
                                 <option value="Engineering and Mathematics" >Engineering and Mathematics</option>
                             </select>
                         </div>
-                        <textarea name="txt-question" placeholder="Ask your question here... "  id="atx-question"  row="10" required></textarea>
+                        <textarea name="txt-question" placeholder="Ask your question here... "  id="atx-question"  row="9" required></textarea>
                         <!-- <a  data-transition="fade" href="#atx-form-page" data-theme="e"  data-role="button">Submit</a>-->
-                        <div data-role="fieldcontain" class="submit-wrapper">
+                        <div data-role="fieldcontain" class="submit-wrapper" id="next">
                             <input type="submit" data-theme="e"  value="Next">
                         </div>
                     </form>
@@ -269,11 +269,11 @@
                 <div  data-role="navbar" class="buttom-button ui-body-b"  >
                     <ul>
                         <li>
-                            <a  data-transition="fade" href="#home-page" data-role="button"  data-direction= "reverse" data-ajax="false" data-icon="home" >Home</a>
+                            <a class="btmbutton"  data-transition="fade" href="#home-page" data-role="button"  data-direction= "reverse" data-ajax="false" data-icon="home" >Home</a>
                         </li>
-                        <!--   <li><a  data-transition="fade" href="#asktheexpert-page" data-role="button"  data-direction= "reverse"   data-icon="grid">Ask </a> </li>         -->
+                        <!--   <li><a class="btmbutton"   data-transition="fade" href="#asktheexpert-page" data-role="button"  data-direction= "reverse"   data-icon="grid">Ask </a> </li>         -->
                         <li>
-                            <a  data-transition="fade" href="#browsetopic-page" data-role="button"  data-direction= "reverse"  data-icon="search">Browse</a>
+                            <a class="btmbutton"  data-transition="fade" href="#browsetopic-page" data-role="button"  data-direction= "reverse"  data-icon="search">Browse</a>
                         </li>
                     </ul>
                 </div>
@@ -301,7 +301,7 @@
 
                             <div data-role="fieldcontain">
                                 <label for="atx-name" class="ui-hidden-accessible">Name:</label>
-                                <input type="text" name="txt-name" id="atx-name" placeholder="Name..." required />
+                                <input type="text" name="txt-name" maxlength="25" pattern="[aA-zZ]" id="atx-name" placeholder="Name..." required />
                             </div>
                             <!--
                             <div data-role="fieldcontain">
@@ -313,7 +313,7 @@
                             
                             <div data-role="fieldcontain">
                                 <label for="atx-age" class="ui-hidden-accessible">Age</label>
-                                  <input type="text" pattern="\d*" placeholder="Age..." name="txt-age" id="atx-age"  min="4" max="70" onfocus="this.type='number'" onblur="this.type='text'"   />
+                                <input type="text" maxlength="2" pattern="[1-6][0-9]" placeholder="Age..." name="txt-age" id="atx-age"  min="4" max="70" onfocus="this.type='number'" onblur="this.type='text'"   />
                                <!--   <input type="text" pattern="\d*" placeholder="Age.." name="txt-age1" id="atx-age1"  /> -->
                             
                              </div>
@@ -353,13 +353,13 @@
                 <div  data-role="navbar" class="buttom-button ui-body-b"  >
                     <ul>
                         <li>
-                            <a   data-role="button" data-rel="back"  data-ajax="false"  data-icon="back">Back </a>
+                            <a  class="btmbutton"   data-role="button" data-rel="back"  data-ajax="false"  data-icon="back">Back </a>
                         </li>
                         <li>
-                            <a  data-transition="fade" href="#home-page" data-role="button" data-icon="home"  data-direction= "reverse"  >Home</a>
+                            <a class="btmbutton"  data-transition="fade" href="#home-page" data-role="button" data-icon="home"  data-direction= "reverse"  >Home</a>
                         </li>
                         <li>
-                            <a  data-transition="fade" href="#browsetopic-page" data-role="button"  data-direction= "reverse"  data-icon="search">Browse</a>
+                            <a class="btmbutton"  data-transition="fade" href="#browsetopic-page" data-role="button"  data-direction= "reverse"  data-icon="search">Browse</a>
                         </li>
                     </ul>
                 </div>
@@ -399,13 +399,13 @@
                 <div  data-role="navbar" class="buttom-button ui-body-b"  >
                     <ul>
                         <li>
-                            <a  data-transition="fade" href="#home-page"  data-direction= "reverse"  data-role="button" data-icon="home" >Home</a>
+                            <a class="btmbutton"  data-transition="fade" href="#home-page"  data-direction= "reverse"  data-role="button" data-icon="home" >Home</a>
                         </li>
                         <li>
-                            <a  data-transition="fade" href="#asktheexpert-page"  data-direction= "reverse"  data-role="button"  data-icon="grid">Ask </a>
+                            <a class="btmbutton"  data-transition="fade" href="#asktheexpert-page"  data-direction= "reverse"  data-role="button"  data-icon="grid">Ask </a>
                         </li>
                         <li>
-                            <a  data-transition="fade" href="#browsetopic-page"  data-direction= "reverse"  data-role="button"  data-icon="search">Browse</a>
+                            <a class="btmbutton"  data-transition="fade" href="#browsetopic-page"  data-direction= "reverse"  data-role="button"  data-icon="search">Browse</a>
                         </li>
                         <!--            <li><a class="btnclose" data-role="button" data-icon="delete"  data-direction= "reverse"  >Close</a> </li>-->
                     </ul>
