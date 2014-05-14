@@ -298,7 +298,7 @@ var Application = {
 
     initCategoryPage: function () {
         if (! Application.checkConnection()) return;
-        if (ajaxing) return; 
+     //   if (ajaxing) return; 
         
         var $List = $('#category-list');
         var $lng = $("#app-language").val();
@@ -386,7 +386,7 @@ var Application = {
         
         
         if (! Application.checkConnection()) return;
-        if (ajaxing) return; 
+      //  if (ajaxing) return; 
         // alert($nid);
         var $body = $('.node-body');
         var $title = $('.node-title');
@@ -448,7 +448,7 @@ var Application = {
     initFaqsListPage: function ($tid) {
         if (! Application.checkConnection())
             return;
-        if (ajaxing) return; 
+      //  if (ajaxing) return; 
         var $List = $('.faqs-list');
         var $lng = $("#app-language").val();
         var $url = $PSserver + 'services/atx_faqlist/' + $tid + '/' + $lng ;
@@ -533,7 +533,7 @@ var Application = {
     
     
     initHomePage: function () {
-        if (ajaxing) return; 
+     //   if (ajaxing) return; 
         var $List = $('#home-faqlist');
         var $lng = $("#app-language").val();
         var $homelistlimit = 4;
