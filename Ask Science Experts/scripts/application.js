@@ -35,19 +35,25 @@ var Application = {
                 Application.initCategoryPage();
             })
             .on('pagebeforeshow', '#browsetopic-page', function () {
-               if (loadCategory === 0)   Application.initCategoryPage();
-               
-               // recheck category for empty 
+               if (loadCategory === 0)                   Application.initCategoryPage();
+            })  
+        
+        // pageshow 
+          .on('pageshow', '#browsetopic-page', function () {
                var count =$('#category-list').children().length;
                if(count<1)
                {
-                $('#category-list').empty();   
-                Application.initCategoryPage();   
+                //    $('#category-list').empty();   
+                Application.initCategoryPage(); 
                }
-                
-            })   
-        
-            .on('pageinit', '#asktheexpert-page', function () {
+              /*
+               if ($('#category-list').hasClass('ui-listview')) {
+                   $('#category-list').listview('refresh');
+               }
+              */  
+            })  
+          
+         .on('pageinit', '#asktheexpert-page', function () {
                 //   Application.initCategoryPage();
             })
         
@@ -125,24 +131,24 @@ var Application = {
         //$(document).off("submit", '#atx-questionform').on("submit", '#atx-questionform', function(event) {       
        $('#atx-questionform').submit(function (event) {
             
-            $( '#atx-questionform [type="submit"]').button('disable');
+           $( '#atx-questionform [type="submit"]').button('disable');
             var data = { };
             data['question'] = $('#atx-question').val().trim(); 
             data['category'] = $('#atx-question-category').val().trim();  
             if (data['category'] === '') {
-                navigator.notification.alert('Invalid Category, Please select question category', function () {
+                navigator.notification.alert('Invalid Category, Please select question category', function () { $('#atx-questionform [type="submit"]').button('enable');
                 }, 'Error');
-                 $('[type="submit"]').button('enable');
+                
                 return false;
             }              
             if (data['question'] === '') {
-                navigator.notification.alert('Question is required and cannot be empty', function () {
+                navigator.notification.alert('Question is required and cannot be empty', function () { $('#atx-questionform [type="submit"]').button('enable');
                 }, 'Error');
-                 $('[type="submit"]').button('enable');
+             //    $('#atx-questionform [type="submit"]').button('enable');
                 return false;
             }
            
-         //   $('[type="submit"]').button('enable');
+            $('#atx-questionform [type="submit"]').button('enable');
             event.preventDefault();
             $.mobile.changePage("#atx-form-page", { transition: "none", changeHash: true });
             return false;
@@ -157,11 +163,12 @@ var Application = {
         	jsonRequest = null;
             $.mobile.loading('hide');
             qSubmit = false;
-         //   $('[type="submit"]').button('enable');
             ajaxing = false;    
            } 
-            $('[type="submit"]').button('enable'); 
+           $('#atx-form-page [type="submit"]').button('enable'); 
+           $('#atx-questionform [type="submit"]').button('enable');
            
+               
         });
         
         
@@ -310,7 +317,7 @@ var Application = {
 
     initCategoryPage: function () {
         if (! Application.checkConnection()) return;
-     //   if (ajaxing) return; 
+        if (ajaxing) return; 
         
         var $List = $('#category-list');
         var $lng = $("#app-language").val();
@@ -318,7 +325,7 @@ var Application = {
         var $url = $PSserver + 'services/atx_faqcategory/' + $lng ;
         var htmlItems = '';
         loadCategory = 0;
-        $List.empty();
+        //$List.empty();
         ajaxing = true;
         jsonRequest=$.jsonp({  callbackParameter:'callback', 
                    type: 'GET',
@@ -398,13 +405,13 @@ var Application = {
         
         
         if (! Application.checkConnection()) return;
-      //  if (ajaxing) return; 
-        // alert($nid);
+        if (ajaxing) return; 
+       
         var $body = $('.node-body');
         var $title = $('.node-title');
         var $lng = $("#app-language").val();
         var $url = $PSserver + 'services/atx_showfaq/' + $nid;
-        ajaxing = true;
+     //   ajaxing = true;
         jsonRequest=$.jsonp({  callbackParameter:'callback', 
                    type: 'GET',
                    url: $url,
