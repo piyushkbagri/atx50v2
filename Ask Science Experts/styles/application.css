@@ -43,8 +43,7 @@ body.ui-mobile-viewport, div.ui-mobile-viewport
 #home-page #homelogo img
 {
     height: 25%;
-    width: 25%; 
-   
+    width: 25%;    
     min-height: 180px;
     min-width: 180px;
 }
@@ -145,7 +144,8 @@ header.ui-header
 
 #atx-question
 {
-    height: 8em;
+   height: 8em;
+   
 }
 
 #node-body p, #atx-success-page .content
@@ -207,8 +207,8 @@ label.error
 @media only screen and (max-width: 320px) and (orientation: portrait)
 {
     #home-page header.ui-header { font-size: 1.6em; }
-   /* header.ui-header { padding-top: 0.5em; } */
-     header.ui-header { padding-top: 0.8em; } 
+   header.ui-header { padding-top: 0.5em; } 
+      /*header.ui-header { padding-top: 0.8em; } */
     
     #home-page .ui-content { padding: 0em 15px; }
     .btn-block { margin:0 0 0.7em 0;  }
@@ -281,7 +281,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
     padding:0.4em 0.4em;
     
 }
-/*#next.ui-field-contain {
-padding: 0em 0em !important;
-}*/
+#next.ui-field-contain {
+padding: 0.5em 0em !important;
+}
 
