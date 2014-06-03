@@ -3,14 +3,14 @@
   <PropertyGroup>
     <ProjectGuid>1906fc01-c292-4c45-a904-a0365aba9577</ProjectGuid>
     <ProjectTypeGuids>{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}</ProjectTypeGuids>
-    <AppIdentifier>com.planetseed.ATX50</AppIdentifier>
+    <AppIdentifier>com.planetseed.ATX</AppIdentifier>
     <ProjectName>Ask Science Experts</ProjectName>
     <IsRunnable>true</IsRunnable>
     <FrameworkVersion>3.2.0</FrameworkVersion>
     <AndroidPermissions>android.permission.INTERNET</AndroidPermissions>
     <CorePlugins>org.apache.cordova.device;org.apache.cordova.network-information;org.apache.cordova.dialogs;org.apache.cordova.splashscreen</CorePlugins>
     <DeviceOrientations>Portrait;Landscape</DeviceOrientations>
-    <iOSStatusBarStyle>Default</iOSStatusBarStyle>
+    <iOSStatusBarStyle>BlackOpaque</iOSStatusBarStyle>
     <AndroidHardwareAcceleration>false</AndroidHardwareAcceleration>
     <WP8SupportedResolutions>ID_RESOLUTION_WVGA;ID_RESOLUTION_WXGA;ID_RESOLUTION_HD720P</WP8SupportedResolutions>
     <BundleVersion>1.1</BundleVersion>
@@ -19,7 +19,7 @@
     <Author>SEED</Author>
     <iOSDeviceFamily>1;2</iOSDeviceFamily>
     <iOSBackgroundMode />
-    <AndroidVersionCode>2</AndroidVersionCode>
+    <AndroidVersionCode>4</AndroidVersionCode>
     <WP8Requirements />
     <WP8Capabilities />
     <WP8TileTitle />
